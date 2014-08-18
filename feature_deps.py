@@ -2,8 +2,8 @@ import numpy as np
 from sklearn import metrics
 from sklearn.feature_selection import chi2,f_classif
 
-traindatafile = open('TrD1.csv','r')
-totalpoints = 7233
+traindatafile = open('TrD2.csv','r')
+totalpoints = 23779
 
 
 big_out = []
@@ -48,6 +48,7 @@ for line in traindatafile:
                 big_missingvalues[i] += 1
 
 important = []
+impvarnumbers = []
 for i in range(len(big_out)):
     if i <= 8:
         trueval = i+1
@@ -66,7 +67,9 @@ for i in range(len(big_out)):
     (a,b) = f_classif(big_a[i],big_out[i])
     print 'mvar_'+ unicode(trueval) + ',' + unicode(np.mean(big_a[i])) + ',' + unicode(np.std(big_a[i])) + ',' + unicode(big_missingvalues[i]) + ',' + unicode(metrics.normalized_mutual_info_score(big_a[i],big_out[i]))+ ',' + '%.15f' % (a[0]) + ',' + unicode(b[0]) + ',Type='+unicode(type)
     if b[0] < 0.01:
-        important.append(trueval)
+        important.append(i)
+        impvarnumbers.append('mvar_'+unicode(trueval))
 
 
 print 'Important indices = ' + unicode(important)
+print 'Important vars = ' + unicode(impvarnumbers)
