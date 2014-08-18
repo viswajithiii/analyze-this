@@ -1,15 +1,17 @@
 import numpy as np
 
-traindatafile = open('Training_Dataset.csv','r')
-c1file = open('TrD1.csv','w')
-c2file = open('TrD2.csv','w')
+traindatafile = open('Leaderboard_Dataset.csv','r')
+c1file = open('LD1.csv','w')
+c2file = open('LD2.csv','w')
+crimeone = 0
+crimetwo = 0
 
 firstlineseen = False
 for line in traindatafile:
     if not firstlineseen:
         firstlineseen = True
         continue
-    splitline =line.split(',')
+    splitline = line.split(',')
     crime = int(splitline[1][-1])
     if crime == 1:
         crimeone += 1
