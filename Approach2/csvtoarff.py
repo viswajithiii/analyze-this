@@ -1,7 +1,7 @@
 yesno =[14,33] #mvar_14 and mvar_33
-inputfile = open('TrD1.csv','r')
-outputfile = open('TrD1.arff','w')
-outputfile.write('@RELATION Crime1TrainData\n\n')
+inputfile = open('TrD1_test.csv','r')
+outputfile = open('TrD1_test.arff','w')
+outputfile.write('@RELATION Crime1Train_testData\n\n')
 
 for i in range(1,41):
     if i in yesno:
@@ -20,10 +20,10 @@ for line in inputfile:
         if len(spline[i]) == 0:
             spline[i] = '?'
     for varindex in yesno:
-        if spline[varindex] == 'Yes':
-            spline[varindex] = 1
-        elif spline[varindex] == 'No':
-            spline[varindex] = 0
+        if spline[varindex-1] == 'Yes':
+            spline[varindex-1] = '1'
+        elif spline[varindex-1] == 'No':
+            spline[varindex-1] = '0'
     outputfile.write(','.join(spline))
     if len(spline[-1]) == 0:
         outputfile.write('\n')
